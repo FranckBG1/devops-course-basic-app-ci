@@ -21,7 +21,7 @@ jobs:
         run: pip install flake8
 
       - name: Linter le code avec Flake8
-        run: flake8 --output-format=default .
+        run: flake8 .
 
       - name: Installer Nose
         run: |
