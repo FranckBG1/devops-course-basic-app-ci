@@ -16,12 +16,16 @@ jobs:
 
       - name: Afficher la version de Python
         run: python -c "import sys; print(sys.version)"
-      - name: Formatter le code avec autopep8
-        run: pip install autopep8 && autopep8 --in-place --recursive .
 
       - name: Installer Flake8
         run: pip install flake8
 
+      
+      - run: |
+          python -m flake8 --max-line-length=120 --extend-ignore=F401 src/__init__.py
+
+      - name: Formatter le code avec autopep8
+        run: pip install autopep8 && autopep8 --in-place --recursive .
       - name: Linter le code avec Flake8
         run: flake8 .
 
