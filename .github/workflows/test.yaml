@@ -16,7 +16,8 @@ jobs:
 
       - name: Afficher la version de Python
         run: python -c "import sys; print(sys.version)"
-
+      - name: install lint flake8
+        run : pip install flake8
       - name: Linter le code avec Flake8
         run: flake8 .
 
