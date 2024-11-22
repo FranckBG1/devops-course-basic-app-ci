@@ -20,7 +20,7 @@ jobs:
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
       - name: Install the code linting and formatting tool Flake8
-        run: pipx install Flake8
+        run: pip install Flake8
       - name: Lint code with Flake8
         run: Flake8 check --output-format=github --target-version=py39
       - name: Check code formatting with Flake8
