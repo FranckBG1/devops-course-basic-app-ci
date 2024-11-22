@@ -2,7 +2,32 @@ name: Github Actions test
 run-name: ${{github.actor}} is testing out Github Actions
 on: [push]
 jobs:
-  Explore-Github-Actions:
-    runs-on: Python 3.9
+  build:
+
+    runs-on: ubuntu-latest
+
     steps:
-      - run: echo"hello world"
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        # This is the version of the action for setting up Python, not the Python version.
+        uses: actions/setup-python@v5
+        with:
+          # Semantic version range syntax or exact version of a Python version
+          python-version: '3.9'
+          # Optional - x64 or x86 architecture, defaults to x64
+          architecture: 'x64'
+      # You can test your matrix by printing the current Python version
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+      - name: Install the code linting and formatting tool Flake8
+        run: pipx install Flake8
+      - name: Lint code with Flake8
+        run: Flake8 check --output-format=github --target-version=py39
+      - name: Check code formatting with Flake8
+        run: Flake8 format --diff --target-version=py39
+        continue-on-error: true
+      - name: install nose
+        run: | 
+              pipx install nose
+              nosetests #executer les tests
+        
